@@ -104,8 +104,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-
   assets:
     - assets/json/
     - assets/image/
@@ -113,12 +111,6 @@ flutter:
     - assets/image/flag/
     - assets/image/splash/
     - assets/image/darkmode/
-    - assets/image/bank/
-    - assets/image/benefit/
-    - assets/image/credit_card/
-    - assets/image/illustration/
-    - assets/image/notification/
-    - assets/image/stock/
     - assets/translations/
     - assets/
 
