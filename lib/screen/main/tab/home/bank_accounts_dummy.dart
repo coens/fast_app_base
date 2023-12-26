@@ -22,5 +22,49 @@ final List<BankAccount> bankAccounts = [
 
 
 main(){
-  print(bankAccounts[0].accountTypeName);
+  // print(bankAccounts[0].accountTypeName);
+  //
+  // for(final item in bankAccounts) {
+  //   print(item.accountTypeName);
+  // }
+  //
+  // final shinhanBank = bankMap['shinhan1'];
+  // print(shinhanBank==bankAccountShinhan1);
+  //
+
+  // for(final entry in bankMap.entries) {
+  //   print(entry.key +  " : " + (entry.value.accountTypeName ?? entry.value.bank.name));
+  // }
+
+
+
+  print(bankSet.contains(bankAccountShinhan1));
+
+  print(bankAccounts.contains(bankAccountShinhan1));
+
+
+  print(bankSet.length);
+
+
+  bankAccounts.toSet();
+  bankSet.toList();
+
+
 }
+
+final bankMap = {
+  "shinhan1" : bankAccountShinhan1,
+  "shinhan2" : bankAccountShinhan2,
+};
+
+
+
+final bankSet = {
+  bankAccountShinhan1,
+  bankAccountShinhan2,
+  bankAccountShinhan3,
+  bankAccountTtoss,
+  bankAccountTtoss,
+  bankAccountTtoss,
+  bankAccountKakao
+};
