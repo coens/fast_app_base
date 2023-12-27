@@ -52,4 +52,8 @@ abstract class AbstractThemeColors {
 
   Color get roundedLayoutBackground => Color.fromARGB(255, 24, 24, 24);
 
+  Color get unreadColor => Color.fromARGB(255, 48, 48, 48);
+
+  Color get lessImportantText => AppColors.grey;
+
 }
