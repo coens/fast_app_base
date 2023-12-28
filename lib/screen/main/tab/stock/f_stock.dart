@@ -3,6 +3,7 @@ import 'package:fast_app_base/screen/main/tab/stock/tab/f_my_stock.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/widget/w_image_button.dart';
+import '../../s_main.dart';
 import 'tab/f_todays_discovery.dart';
 
 class StockFragment extends StatefulWidget {
@@ -55,14 +56,10 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
               MyStockFragment()
             else
               TodaysDiscoveryFragment(),
-
-            myAccount,
-            height20,
-            myStocks,
           ],
         ))
       ],
-    );
+    ).pSymmetric(v: MainScreenState.bottomNavigatorHeight);
   }
 
   Widget get title => Container(
@@ -97,8 +94,4 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
           ],
         ),
   );
-
-  Widget get myAccount => Placeholder();
-
-  Widget get myStocks => Placeholder();
 }

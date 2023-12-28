@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../common/widget/w_height_and_width.dart';
+import 'w_interest_stock_list.dart';
 
 class MyStockFragment extends StatelessWidget {
   const MyStockFragment({super.key});
@@ -42,40 +43,45 @@ class MyStockFragment extends StatelessWidget {
         ),
       );
 
-  Widget getMyStocks(BuildContext context) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        color: context.appColors.roundedLayoutBackground,
-        child: Column(
-          children: [
-            height30,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget getMyStocks(BuildContext context) => Column(
+    children: [
+      Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            color: context.appColors.roundedLayoutBackground,
+            child: Column(
               children: [
-                "관심주식".text.bold.make(),
-                "편집하기".text.color(context.appColors.lessImportant).bold.make(),
-              ],
-            ),
-            height30,
-            Tap(
-              onTap: () {
-                context.showSnackbar('기본');
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Row(
+                height30,
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    "기본".text.bold.make(),
-                    Arrow(
-                      direction: AxisDirection.up,
-                    )
+                    "관심주식".text.bold.make(),
+                    "편집하기".text.color(context.appColors.lessImportant).bold.make(),
                   ],
                 ),
-              ),
+                height30,
+                Tap(
+                  onTap: () {
+                    context.showSnackbar('기본');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        "기본".text.bold.make(),
+                        Arrow(
+                          direction: AxisDirection.up,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      );
+          ),
+      InterestStockList().pSymmetric(h: 20),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -88,3 +94,4 @@ class MyStockFragment extends StatelessWidget {
     );
   }
 }
+
