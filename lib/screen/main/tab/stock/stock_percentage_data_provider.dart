@@ -14,7 +14,8 @@ abstract mixin class StockPercentageProvider {
   bool get isMinus => currentPrice<yesterdayClosePrice;
   bool get isSame => currentPrice==yesterdayClosePrice;
 
-  String get symbol => isSame ? "" : isPlus ? "+" : "-";
+  // String get symbol => isSame ? "" : isPlus ? "+" : "";
+  String get symbol => isPlus ? "+" : "";
   String get todayPrecentageString => "${symbol}$todayPercentage %";
   Color getPriceColor(BuildContext context) => isSame ? context.appColors.lessImportant : isPlus ? context.appColors.plus : context.appColors.minus;
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../common/widget/w_image_button.dart';
 import '../../s_main.dart';
+import 'search/s_search_stock.dart';
 import 'tab/f_todays_discovery.dart';
 
 class StockFragment extends StatefulWidget {
@@ -29,7 +30,8 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
             ImageButton(
               imagePath: "$basePath/icon/stock_search.png",
               onTap: () {
-                context.showSnackbar("검색");
+                Nav.push(SearchStockScreen());
+
               },
             ),
             ImageButton(
@@ -59,7 +61,7 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
           ],
         ))
       ],
-    ).pSymmetric(v: MainScreenState.bottomNavigatorHeight);
+    ).pOnly(bottom: MainScreenState.bottomNavigatorHeight);
   }
 
   Widget get title => Container(

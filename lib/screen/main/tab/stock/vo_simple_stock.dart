@@ -3,5 +3,10 @@ class SimpleStock {
 
   SimpleStock(this.stockName);
 
+  //static fromJson(json) {}
+  factory SimpleStock.fromJson(dynamic json){
+    return SimpleStock(json['name']);
+  }
+
 }
 
