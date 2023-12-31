@@ -28,13 +28,13 @@ class HomeFragment extends StatelessWidget {
       color: Colors.black,
       child: Stack(
         children: [
-          LiveBackgroundWidget(
-            palette: Palette(
-              colors: [Colors.red, Colors.green],
-            ),
-            velocityX: 1,
-            particleMaxSize: 20,
-          ),
+          // LiveBackgroundWidget(
+          //   palette: Palette(
+          //     colors: [Colors.red, Colors.green],
+          //   ),
+          //   velocityX: 1,
+          //   particleMaxSize: 20,
+          // ),
           RefreshIndicator(
             edgeOffset: TtossAppBar.appBarHeight,
             onRefresh: () async {
@@ -52,7 +52,7 @@ class HomeFragment extends StatelessWidget {
                   }),
                   height10,
                   RoundedContainer(
-                    backgroundColor: Color.fromARGB(180, 100, 100, 100),
+                    // backgroundColor: Color.fromARGB(180, 100, 100, 100),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
