@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../common/widget/w_image_button.dart';
 import '../../s_main.dart';
 import 'search/s_search_stock.dart';
+import 'setting/s_setting.dart';
 import 'tab/f_todays_discovery.dart';
 
 class StockFragment extends StatefulWidget {
@@ -43,7 +44,7 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
             ImageButton(
               imagePath: "$basePath/icon/stock_settings.png",
               onTap: () {
-                context.showSnackbar("설정");
+                Nav.push(SettingScreen());
               },
             ),
           ],
