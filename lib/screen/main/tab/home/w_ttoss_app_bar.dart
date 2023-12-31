@@ -17,8 +17,6 @@ class _TtossAppBarState extends State<TtossAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    //_tappingCount = 0;
-
     return Container(
       height: TtossAppBar.appBarHeight,
       color: context.appColors.appBarBackground,
