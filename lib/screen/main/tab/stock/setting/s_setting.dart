@@ -8,6 +8,8 @@ import 'package:fast_app_base/screen/opensource/s_opensource.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'w_animated_app_bar.dart';
+
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
 
@@ -17,7 +19,7 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   bool isPushOn = false;
-
+  final scrollController = ScrollController();
   @override
   void initState() {
     isPushOn = Prefs.isPushOn.get();
@@ -27,63 +29,71 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: "설정".text.make(),
-      ),
-      body: ListView(
+      // appBar: AppBar(
+      //   title: "설정".text.make(),
+      // ),
+      body: Stack(
         children: [
-          Obx(
-            () => SwitchMenu(
-              "푸시 설정",
-              Prefs.isPushOnRx.get(),
-              onChanged: (isOn) {
-                Prefs.isPushOnRx.set(isOn);
-              },
-            ),
-          ),
-          Obx(
-            () => Slider(
-              value: Prefs.siliderPosition.get(),
-              onChanged: (value) {
-                //Prefs.siliderPosition.set(value);
-                Prefs.siliderPosition(value);
-              },
-            ),
-          ),
-          Obx(
-            () => BigButton(
-              '날짜 ${Prefs.birthday.get() == null ? "" : Prefs.birthday.get()?.formattedDate}',
-              onTap: () async {
-                final date = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime.now().subtract(10.days),
-                  lastDate: DateTime.now().add(6.days),
-                );
+          ListView(
+            padding: EdgeInsets.only(top: 150),
+            controller: scrollController,
+            children: [
+              Obx(
+                () => SwitchMenu(
+                  "푸시 설정",
+                  Prefs.isPushOnRx.get(),
+                  onChanged: (isOn) {
+                    Prefs.isPushOnRx.set(isOn);
+                  },
+                ),
+              ),
+              Obx(
+                () => Slider(
+                  value: Prefs.siliderPosition.get(),
+                  onChanged: (value) {
+                    //Prefs.siliderPosition.set(value);
+                    Prefs.siliderPosition(value);
+                  },
+                ),
+              ),
+              Obx(
+                () => BigButton(
+                  '날짜 ${Prefs.birthday.get() == null ? "" : Prefs.birthday.get()?.formattedDate}',
+                  onTap: () async {
+                    final date = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now().subtract(10.days),
+                      lastDate: DateTime.now().add(6.days),
+                    );
 
-                if (date != null) {
-                  Prefs.birthday.set(date);
-                }
-              },
-            ),
+                    if (date != null) {
+                      Prefs.birthday.set(date);
+                    }
+                  },
+                ),
+              ),
+              Obx(
+                () => BigButton(
+                  '저장된 숫자 ${Prefs.number.get().toString()}',
+                  onTap: () async {
+                    final number = await NumberDialog().show();
+                    if (number != null) {
+                      Prefs.number.set(number);
+                    }
+                  },
+                ),
+              ),
+              BigButton(
+                "오픈소스 화면",
+                onTap: () {
+                  Nav.push(OpensourceScreen());
+                },
+              ),
+              Container(height: 500,color: Colors.green,)
+            ],
           ),
-          Obx(
-            () => BigButton(
-              '저장된 숫자 ${Prefs.number.get().toString()}',
-              onTap: () async {
-                final number = await NumberDialog().show();
-                if (number != null) {
-                  Prefs.number.set(number);
-                }
-              },
-            ),
-          ),
-          BigButton(
-            "오픈소스 화면",
-            onTap: () {
-              Nav.push(OpensourceScreen());
-            },
-          )
+          AnimatedAppBar('설정', controller : scrollController),
         ],
       ),
     );
