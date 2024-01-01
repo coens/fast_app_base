@@ -17,11 +17,23 @@ class SettingScreen extends StatefulWidget {
   State<SettingScreen> createState() => _SettingScreenState();
 }
 
-class _SettingScreenState extends State<SettingScreen> {
+class _SettingScreenState extends State<SettingScreen> with SingleTickerProviderStateMixin{
   bool isPushOn = false;
   final scrollController = ScrollController();
+  late final AnimationController animationController = AnimationController(vsync: this, duration: 2000.ms);
+
   @override
   void initState() {
+    animationController.addListener(() {
+      final status = animationController.status;
+      switch (status) {
+        case AnimationStatus.forward:
+        case AnimationStatus.reverse:
+        case AnimationStatus.completed:
+        case AnimationStatus.dismissed:
+      }
+    });
+
     isPushOn = Prefs.isPushOn.get();
     super.initState();
   }
@@ -51,6 +63,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 () => Slider(
                   value: Prefs.siliderPosition.get(),
                   onChanged: (value) {
+                    animationController.animateTo(value, duration: 0.ms);
                     //Prefs.siliderPosition.set(value);
                     Prefs.siliderPosition(value);
                   },
@@ -90,10 +103,41 @@ class _SettingScreenState extends State<SettingScreen> {
                   Nav.push(OpensourceScreen());
                 },
               ),
-              Container(height: 500,color: Colors.green,)
+              BigButton(
+                '애니메이션 forward',
+                onTap: () async {
+                  animationController.forward();
+                },
+              ),
+              BigButton(
+                '애니메이션 reverse',
+                onTap: () async {
+                  animationController.reverse();
+                },
+              ),
+              BigButton(
+                '애니메이션 repeat',
+                onTap: () async {
+                  animationController.repeat();
+                },
+              ),
+              BigButton(
+                '애니메이션 reset',
+                onTap: () async {
+                  animationController.reset();
+                },
+              ),
+              Container(
+                height: 500,
+                color: Colors.green,
+              )
             ],
           ),
-          AnimatedAppBar('설정', controller : scrollController),
+          AnimatedAppBar(
+            '설정',
+            scrollController: scrollController,
+            animationController: animationController,
+          ),
         ],
       ),
     );
