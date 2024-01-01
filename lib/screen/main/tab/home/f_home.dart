@@ -5,6 +5,7 @@ import 'package:fast_app_base/screen/dialog/d_message.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:fast_app_base/screen/main/tab/home/bank_accounts_dummy.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_bank_account.dart';
+import 'package:fast_app_base/screen/main/tab/home/w_rive_like_button.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_ttoss_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -15,10 +16,18 @@ import '../../../../common/widget/w_big_button.dart';
 import '../../../dialog/d_color_bottom.dart';
 import '../../../dialog/d_confirm.dart';
 
-class HomeFragment extends StatelessWidget {
+class HomeFragment extends StatefulWidget {
+
   const HomeFragment({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<HomeFragment> createState() => _HomeFragmentState();
+}
+
+class _HomeFragmentState extends State<HomeFragment> {
+  bool isLike = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +37,13 @@ class HomeFragment extends StatelessWidget {
       color: Colors.black,
       child: Stack(
         children: [
-          // LiveBackgroundWidget(
-          //   palette: Palette(
-          //     colors: [Colors.red, Colors.green],
-          //   ),
-          //   velocityX: 1,
-          //   particleMaxSize: 20,
-          // ),
+          LiveBackgroundWidget(
+            palette: Palette(
+              colors: [Colors.red, Colors.green],
+            ),
+            velocityX: 1,
+            particleMaxSize: 20,
+          ),
           RefreshIndicator(
             edgeOffset: TtossAppBar.appBarHeight,
             onRefresh: () async {
@@ -47,6 +56,15 @@ class HomeFragment extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 250,
+                    width: 250,
+                    child: RiveLikeButton(isLike, onTapLike: (isLike) {
+                      setState(() {
+                        this.isLike = isLike;
+                      });
+                    },),
+                  ),
                   BigButton("토스뱅크", onTap: () {
                     context.showSnackbar("토스뱅크를 눌렀어요");
                   }),
