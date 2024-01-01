@@ -1,5 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../../common/widget/w_arrow.dart';
 
@@ -29,18 +30,19 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
     super.initState();
   }
 
-
   bool get isTriggered => scrollPosition > 80;
+
   bool get isNotTriggered => !isTriggered;
-  double getValue(double initial, double target){
-    if(isTriggered){
+
+  double getValue(double initial, double target) {
+    if (isTriggered) {
       return target;
     }
 
-    double fraction = scrollPosition/80;
-    return initial + (target-initial)*fraction;
-
+    double fraction = scrollPosition / 80;
+    return initial + (target - initial) * fraction;
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,6 +51,15 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
       child: SafeArea(
         child: Stack(
           children: [
+            AnimatedContainer(
+              duration: duration,
+              padding: EdgeInsets.only(left: getValue(20, 50), top: getValue(20, 50)),
+              child: AnimatedDefaultTextStyle(
+                style: TextStyle(fontSize: isNotTriggered ? 30 : 15),
+                duration: duration,
+                child: widget.title.text.make(),
+              ),
+            ),
             Tap(
               onTap: () {
                 Nav.pop(context);
@@ -57,15 +68,25 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                 direction: AxisDirection.left,
               ),
             ).p20(),
-            AnimatedContainer(
-              duration: duration,
-              padding: EdgeInsets.only(left: getValue(20,50), top: getValue(20,50)),
-              child: AnimatedDefaultTextStyle(
-                style: TextStyle(fontSize: isNotTriggered ? 30 : 15),
-                duration: duration,
-                child: widget.title.text.make(),
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.topRight,
+                child: TweenAnimationBuilder<Color?>(
+                  duration: 1000.ms,
+                  tween: ColorTween(begin: Colors.green, end: isTriggered ? Colors.orange : Colors.green),
+                  builder: (context, value, child) => ColorFiltered(
+                    colorFilter: ColorFilter.mode(value ?? Colors.green, BlendMode.modulate),
+                    child: child,
+                  ),
+                  child: Image.asset(
+                    "$basePath/icon/map_point.png",
+                    height: 60,
+                    // color: value,
+                    // colorBlendMode: BlendMode.modulate,
+                  ),
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),
